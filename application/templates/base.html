@@ -1,5 +1,12 @@
 <a href="{{ url_for('index') }}">Home</a> <a href="{{ url_for('search') }}">Search</a> <a href="{{ url_for('register') }}">Register</a>
 
+<!DOCTYPE html>
+<html>
+  <body>
+    <title>Bookshop</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'css/background.css')}}">
+  </body>
+
 {% block content %}
 {% endblock content %}
 
