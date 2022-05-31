@@ -2,11 +2,20 @@
 
 {% block content %}
 
-<body>
-    <div>
-    <center><img src="{{url_for('static', filename = 'images/bookshop-wordart.png')}}" width = 1100 height = 500></center> 
-    </div>
-</body>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Jazz's Bookshop</title>
+  </head>
+    <body>
+      <div class = "image">
+        <img src="{{url_for('static', filename = 'images/bookshop-wordart.png')}}" width = 1100 height = 500>
+      </div>
+    </body>
+</html>  
+
+
 
 {% endblock content %}
 

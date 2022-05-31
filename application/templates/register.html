@@ -1,26 +1,44 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} {% block content %}
 
-{% block content %}
+<!DOCTYPE html>
 <html>
-    <head>
-        <title>Register form</title>
-    </head>
-    <body>
-        <div class='form'>
-            <form method='POST' action=''>
-                {{ form.hidden_tag() }}
-                {{ form.first_name.label }} {{ form.first_name }}
-                <br>
-                {{ form.last_name.label }} {{ form.last_name }}
-                <br>
-                {{ form.d_o_b.label }} {{ form.d_o_b }}
-                <br>
-                {{ form.submit }}
-                <br>
-            {{ message }} 
-            <br>
-            </form>
-        </div>
-    </body>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Register</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename = 'css/background.css')}}"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <div class="form">
+        <formContainer>
+          <form method="POST" action="">
+            {{ form.hidden_tag() }} {{ form.first_name.label }} {{
+            form.first_name }}
+            <br />
+            {{ form.last_name.label }} {{ form.last_name }}
+            <br />
+            {{ form.d_o_b.label }} {{ form.d_o_b }}
+            <br />
+            {{ form.email.label }} {{ form.email }}
+            <br />
+            {{ form.address_1.label }} {{ form.address_1 }}
+            <br />
+            {{ form.address_2.label }} {{ form.address_2 }}
+            <br />
+            {{ form.post_code.label }} {{ form.post_code }}
+            <br />
+            {{ form.submit }}
+            <br />
+            {{ message }}
+            <br />
+          </form>
+        </formContainer>
+      </div>
+    </div>
+  </body>
 </html>
+
 {% endblock content %}

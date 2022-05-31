@@ -1,7 +1,28 @@
+.image {
+  display: flex;
+  justify-content: center;
+}
 
 body {
-    background-image: url(../images/bookshop-background.jpeg);
-    height: 50;
-    width: 50;
-  }
+    background-color: cornsilk;
+    background-image: url(../images/books.png);
+    background-attachment: fixed;
+    height: 100%;
+    width: 100%;
+}
 
+
+.menu {
+  background-color: lightgray;
+  margin-bottom: 50px;
+  padding: 2px;
+}
+
+.container {
+  padding-top: 50px; 
+  width: 70%; 
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  background-color: rgb(192, 192, 192, 0.8);
+}

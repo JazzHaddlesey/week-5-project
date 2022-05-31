@@ -1,12 +1,19 @@
-<a href="{{ url_for('index') }}">Home</a> <a href="{{ url_for('search') }}">Search</a> <a href="{{ url_for('register') }}">Register</a>
-
 <!DOCTYPE html>
 <html>
+  <head>
+    <meta charset="UTF-8" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename = 'css/background.css')}}"
+    />
+  </head>
   <body>
-    <title>Bookshop</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename = 'css/background.css')}}">
+    <div class="menu">
+      <a href="{{ url_for('index') }}">Home</a>
+      <a href="{{ url_for('search') }}">Search</a>
+      <a href="{{ url_for('register') }}">Register</a>
+    </div>
   </body>
+</html>
 
-{% block content %}
-{% endblock content %}
-
+{% block content %} {% endblock content %}
