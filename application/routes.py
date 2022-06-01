@@ -31,19 +31,27 @@ def search():
             
     return render_template('search.html', form = form, message = message)
 
-@app.route('/add', methods = ['GET', 'POST'])
+@app.route('/add')
 def add():
-    message = ""
-    form = AddForm()
+    new_book = Books(name = input("New Book"))
+    db.session.add(new_book)
+    db.session.commit()
+    return "Added new game to database"
+   
 
-    return render_template('add.html', form=form, message=message)
-
-@app.route('/delete')
+@app.route('/delete/<intid>')
 def delete():
-    message = ""
-    form = DeleteForm()
-    
-    return render_template('delete.html', form = form, message = message)
+    btd = Books.query.get(id)
+    db.session.delete(btd)
+    db.session.commit
+    return f'{btd.name}, has been deleted'
+
+@app.route('/update/<name>')
+def update(name):
+    first_book = Books.query.first()
+    first_book.name = name
+    db.session.commit()
+    return f'{first_book.name}, has been updated'
 
 @app.route('/login')
 def login():
