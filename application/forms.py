@@ -10,18 +10,18 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'YOUR_SECRET_KEY'
 
 
-class RegisterForm(FlaskForm):
+class CustomerForm(FlaskForm):
     first_name = StringField('First Name: ')
     last_name = StringField('Last Name: ')
     d_o_b = DateField('Date of Birth: ')
     email = StringField('Email Address: ')
-    address_1 = StringField('Address line 1: ')
-    address_2 = StringField('Address line 2: ')
+    address = StringField('Address: ')
     post_code = StringField('Postcode: ')
     submit = SubmitField('Register')
     
 class SearchForm(FlaskForm):
-    searched = StringField('Enter Author Name or Book Title: ', validators=[DataRequired()])
+    a_search = StringField('Enter Author Name or Book Title: ')
+    b_search = StringField('Enter Book Title: ')
     submit = SubmitField('Search')
     
 class AddForm(FlaskForm):

@@ -17,12 +17,8 @@
       <div class="form">
         <formContainer>
           <form method="POST" action="">
-            {{ form.hidden_tag() }} {{ form.searched.label }} {{
-            form.searched }}
-            <br />
-            {{ form.submit }}
-            <br />
-            {{ message }}
+            {{ form.hidden_tag() }} 
+            {{ form.from.label }} {{ form.from }}
             <br />
           </form>
         </formContainer>
