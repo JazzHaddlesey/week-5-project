@@ -1,25 +1,49 @@
 
 from application import app, db
-from application.models import Authors
+from application.models import Authors, Books 
 from flask import Flask, render_template, request, url_for
 from flask_wtf import FlaskForm
 from sqlalchemy import null
-from wtforms import StringField, SubmitField, DateField, IntegerField, SelectField
-import application.forms
+from application.forms import RegisterForm, SearchForm, AddForm, DeleteForm
 import os
 
-
-
-app.config['SECRET_KEY'] = 'YOUR_SECRET_KEY'
 
 
 @app.route('/')
 def index():
     return render_template('index.html')
 
-@app.route('/search')
+@app.route('/search', methods = ['GET','POST'])
 def search():
-    return render_template('search.html')
+    message = ""
+    var1 = Books.query.filter_by(name = '').all()
+    var2 = Authors.query.filter_by(name = '').all()
+    form = SearchForm()
+    
+    if request.method == 'POST':
+        searched = form.searched.data
+        
+        if len(searched) == 0:
+            message = 'Please enter name of author, or book'
+            
+        else:
+            message = 'Results: \n'
+            
+    return render_template('search.html', form = form, message = message)
+
+@app.route('/add', methods = ['GET', 'POST'])
+def add():
+    message = ""
+    form = AddForm()
+
+    return render_template('add.html', form=form, message=message)
+
+@app.route('/delete')
+def delete():
+    message = ""
+    form = DeleteForm()
+    
+    return render_template('delete.html', form = form, message = message)
 
 @app.route('/login')
 def login():
@@ -28,7 +52,7 @@ def login():
 @app.route('/register', methods = ['GET','POST'])
 def register():
     message = ""
-    form = application.forms.RegisterForm()
+    form = RegisterForm()
 
     if request.method == 'POST':
         first_name = form.first_name.data
