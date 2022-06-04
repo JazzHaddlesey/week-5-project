@@ -13,19 +13,17 @@
   <body>
     <div class="container">
       <div class="form">
-        <formContainer>
           <form method="POST" action="">
-            {{ form.hidden_tag() }} {{ form.author_name.label }} {{
-            form.author_name }}
+            {{ form.hidden_tag() }} {{ form.add_author.label }} {{
+            form.add.author }}
             <br />
-            {{ form.book_name.label }} {{ form.book_name }}
+            {{ form.add_book.label }} {{ form.add_book }}
             <br />
             {{ form.submit }}
             <br />
             {{ message }}
             <br />
           </form>
-        </formContainer>
       </div>
     </div>
   </body>
