@@ -1,8 +1,8 @@
 
 from application import app, db
+from application.forms import AddForm
 from application.models import Authors, Books 
-from application.forms import Add
-from flask import Flask, render_template, request, url_for
+from flask import Flask, render_template, request, url_for, redirect
 from flask_wtf import FlaskForm
 from sqlalchemy import null
 import os
@@ -16,13 +16,15 @@ def index():
 
 @app.route('/add', methods = ['GET', 'POST'])
 def add():
-    form = Add()
+    form = AddForm()
+    message =''
     if request.method == 'POST' and form.validate():
-        new_book = Books(form.data.add)
+        new_book = Books(name = form.add_book.data)
+        message = 'Has been added to library'
         db.session.add(new_book)
         db.session.commit()
-        return redirect(urlf_for('index'))
-    return render_template('add.html', form = form)
+        return redirect(url_for('index'))
+    return render_template('add.html', form = form, message = message)
 
 @app.route('/read')
 def read():

@@ -16,18 +16,10 @@ class TestBase(TestCase):
     
     def setUp(self):
         author1 = Authors(name="R.F.Kuang")
-        author2 = Authors(name="George.R.R.Martin")
-        author3 = Authors(name="J.K.Rowling")
         book1 = Books(name="The Dragon Republic")
-        book2 = Books(name="A Song of Ice and Fire")
-        book3 = Books(name="Harry Potter and The Philosopher's Stone")
         db.create_all()
         db.session.add(author1)
-        db.session.add(author2)
-        db.session.add(author3)
         db.session.add(book1)
-        db.session.add(book2)
-        db.session.add(book3)
         db.session.commit()
         
     def tearDown(self):
@@ -38,5 +30,14 @@ class TestViewHome(TestBase):
     def test_get_home(self):
         response = self.client.get(url_for("index"))
         self.assert200(response)
+
+class TestAddBook(TestBase):
+    def test_post_add(self):
+        response = self.client.post(url_for('add'),
+        data = dict(add = 'Book has been added'),
+        follow_redirects = True
+        )
+        self.assert200(response)
+        self.assertIn(b'been added', response.data)
         
         
