@@ -11,14 +11,14 @@ class Books(db.Model):
     name = db.Column(db.String(30))
     author = db.Column(db.Integer, db.ForeignKey('authors.id'))
     
-class Customer(db.Model):
-    id = db.Column(db.Integer, primary_key = True)
-    first_name = db.Column(db.String(30))
-    last_name = db.Column(db.String(30))
-    d_o_b = db.Column(db.Date)
-    email = db.Column(db.String(50))
-    address = db.Column(db.String(30))
-    post_code = db.Column(db.String(10))
+# class Customer(db.Model):
+#     id = db.Column(db.Integer, primary_key = True)
+#     first_name = db.Column(db.String(30))
+#     last_name = db.Column(db.String(30))
+#     d_o_b = db.Column(db.Date)
+#     email = db.Column(db.String(50))
+#     address = db.Column(db.String(30))
+#     post_code = db.Column(db.String(10))
     
     
 # class Orders(db.Model):
