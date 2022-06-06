@@ -31,6 +31,11 @@ class TestViewHome(TestBase):
         response = self.client.get(url_for("index"))
         self.assert200(response)
 
+class TestViewAdd(TestBase):
+    def test_get_add(self):
+        response = self.client.get(url_for("add"))
+        self.assert200(response)
+
 class TestAddBook(TestBase):
     def test_post_add(self):
         response = self.client.post(url_for('add'),
@@ -38,6 +43,10 @@ class TestAddBook(TestBase):
         follow_redirects = True
         )
         self.assert200(response)
-        self.assertIn(b'been added', response.data)
         
+        
+class TestViewRead(TestBase):
+    def test_get_add(self):
+        response = self.client.get(url_for("read"))
+        self.assert200(response)      
         

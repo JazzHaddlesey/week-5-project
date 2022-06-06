@@ -29,10 +29,10 @@ class AddForm(FlaskForm):
     add_book = StringField('Book name: ')
     submit = SubmitField('Submit')
     
-# class DeleteForm(FlaskForm):
-#     author_name = StringField('Delete; Authors name: ')
-#     book_name = StringField('Delete; Book name: ')
-#     submit = SubmitField('Submit')    
+class DeleteForm(FlaskForm):
+    delete_author = StringField('Delete Author: ')
+    delete_book = StringField('Delete Book: ')
+    submit = SubmitField('Submit')    
 
     
 

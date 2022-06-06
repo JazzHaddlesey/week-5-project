@@ -1,6 +1,6 @@
 
 from application import app, db
-from application.forms import AddForm
+from application.forms import AddForm, DeleteForm
 from application.models import Authors, Books 
 from flask import Flask, render_template, request, url_for, redirect
 from flask_wtf import FlaskForm
@@ -19,20 +19,19 @@ def add():
     form = AddForm()
     message =''
     if request.method == 'POST' and form.validate():
+        new_author = Authors(name = form.add_author.data)
         new_book = Books(name = form.add_book.data)
         message = 'Has been added to library'
         db.session.add(new_book)
+        db.session.add(new_author)
         db.session.commit()
         return redirect(url_for('index'))
     return render_template('add.html', form = form, message = message)
 
-@app.route('/read')
+@app.route('/read', methods = ['GET'])
 def read():
     all_books = Books.query.all()
-    books_string = ""
-    for book in all_books:
-        books_string += "<br>"+ book.name
-    return books_string
+    return render_template('read.html', all_books = all_books)
 
 @app.route('/update/<name>')
 def update(name):
@@ -41,12 +40,18 @@ def update(name):
     db.session.commit()
     return f'{first_book.name}, has been updated'
    
-@app.route('/delete')
+@app.route('/delete', methods = ['GET', 'POST'])
 def delete():
-    btd = Books.query.first()
-    db.session.delete(btd)
-    db.session.commit()
-    return f'{btd.name}, has been deleted'
+    form = DeleteForm()
+    message = ''
+    if request.method == 'POST' and form.validate():
+        atd = Authors(name = form.delete_author.data)
+        btd = Books(name = form.delete_book.data)
+        db.session.delete(btd)
+        db.session.delete(atd)
+        db.session.commit()
+        return redirect(url_for('index'))
+    return render_template('delete.html', form = form, message = message)
 
 # @app.route('/register', methods = ['GET','POST'])
 # def register():
