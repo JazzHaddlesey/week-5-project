@@ -1,50 +1,73 @@
 
 from application import app, db
-from application.models import Authors
-from flask import Flask, render_template, request, url_for
+from application.forms import AddForm, DeleteForm
+from application.models import Authors, Books 
+from flask import Flask, render_template, request, url_for, redirect
 from flask_wtf import FlaskForm
 from sqlalchemy import null
-from wtforms import StringField, SubmitField, DateField, IntegerField, SelectField
-import application.forms
 import os
 
-
-
-app.config['SECRET_KEY'] = 'YOUR_SECRET_KEY'
 
 
 @app.route('/')
 def index():
     return render_template('index.html')
 
-@app.route('/search')
-def search():
-    return render_template('search.html')
 
-@app.route('/login')
-def login():
-    return render_template('login.html')
+@app.route('/add', methods = ['GET', 'POST'])
+def add():
+    form = AddForm()
+    message =''
+    if request.method == 'POST' and form.validate():
+        new_author = Authors(name = form.add_author.data)
+        new_book = Books(name = form.add_book.data)
+        message = 'Has been added to library'
+        db.session.add(new_book)
+        db.session.add(new_author)
+        db.session.commit()
+        return redirect(url_for('index'))
+    return render_template('add.html', form = form, message = message)
 
-@app.route('/register', methods = ['GET','POST'])
-def register():
-    message = ""
-    form = application.forms.RegisterForm()
+@app.route('/read', methods = ['GET'])
+def read():
+    all_books = Books.query.all()
+    return render_template('read.html', all_books = all_books)
 
-    if request.method == 'POST':
-        first_name = form.first_name.data
-        last_name = form.last_name.data
-        d_o_b = form.d_o_b.data
-        email = form.email.data
-        post_code = form.post_code.data
-        
+@app.route('/update/<name>')
+def update(name):
+    first_book = Books.query.first()
+    first_book.name = name
+    db.session.commit()
+    return f'{first_book.name}, has been updated'
+   
+@app.route('/delete', methods = ['GET', 'POST'])
+def delete():
+    form = DeleteForm()
+    message = ''
+    if request.method == 'POST' and form.validate():
+        atd = Authors(name = form.delete_author.data)
+        btd = Books(name = form.delete_book.data)
+        db.session.delete(btd)
+        db.session.delete(atd)
+        db.session.commit()
+        return redirect(url_for('index'))
+    return render_template('delete.html', form = form, message = message)
 
-        if len(first_name) == 0 or len(last_name) == 0 or d_o_b == null or len(email) == 0 or len(post_code) == 0:
-            message = "Please supply all information"
+# @app.route('/register', methods = ['GET','POST'])
+# def register():
+#     message = ''
+#     form = CustomerForm()
+
+#     if request.method == 'POST':
+#         if form.validate_on_submit():
+#             cust = Customer(first_name = form.first_name.data, last_name = form.last_name.data, 
+#                                  d_o_b = form.d_o_b.data, email = form.email.data, address = form.address.data, 
+#                                  post_code = form.post_code.data)
+#             db.session.add(cust)
+#             db.session.commit()
+#             return f' Thank you {cust.first_name} {cust.last_name} you have successfully registered.'
             
-        else:
-            message = f'Thank you {first_name} {last_name}, you have successfully registered.'
-            
-    return render_template('register.html', form=form, message=message)
+#     return render_template('register.html', form = form, meassage = message)
 
 
     

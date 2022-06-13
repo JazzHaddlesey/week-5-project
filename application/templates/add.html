@@ -1,0 +1,32 @@
+{% extends 'base.html' %} {% block content %}
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Add</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename = 'css/background.css')}}"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <div class="form">
+          <form method="POST" action="">
+            {{ form.hidden_tag() }} {{ form.add_author.label }} {{
+            form.add_author }}
+            <br />
+            {{ form.add_book.label }} {{ form.add_book }}
+            <br />
+            {{ form.submit }}
+            <br />
+            {{ message }}
+            <br />
+          </form>
+      </div>
+    </div>
+  </body>
+</html>
+
+{% endblock content %}
