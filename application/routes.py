@@ -1,6 +1,6 @@
 
 from application import app, db
-from application.forms import AddForm, DeleteForm
+from application.forms import AddForm, DeleteForm, UpdateForm
 from application.models import Authors, Books 
 from flask import Flask, render_template, request, url_for, redirect
 from flask_wtf import FlaskForm
@@ -33,12 +33,18 @@ def read():
     all_books = Books.query.all()
     return render_template('read.html', all_books = all_books)
 
-@app.route('/update/<name>')
-def update(name):
-    first_book = Books.query.first()
-    first_book.name = name
-    db.session.commit()
-    return f'{first_book.name}, has been updated'
+@app.route('/update', methods = ['GET', 'POST'])
+def update():
+    form = UpdateForm()
+    message = ''
+    if request.method == 'POST' and form.validate():
+        atu = Authors(name = form.update_author.data)
+        btu = Books(name = form.update_book.data)
+        db.session.update(btu)
+        db.session.update(atu)
+        db.session.commit()
+        return redirect(url_for('index'))
+    return render_template('update.html', form = form, message = message)
    
 @app.route('/delete', methods = ['GET', 'POST'])
 def delete():

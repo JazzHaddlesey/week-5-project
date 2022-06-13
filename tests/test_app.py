@@ -44,9 +44,34 @@ class TestAddBook(TestBase):
         )
         self.assert200(response)
         
-        
 class TestViewRead(TestBase):
     def test_get_add(self):
         response = self.client.get(url_for("read"))
         self.assert200(response)      
         
+class TestViewUpdate(TestBase):
+    def test_get_update(self):
+        response = self.client.get(url_for("update"))
+        self.assert500(response)
+
+class TestUpdateBook(TestBase):
+    def test_post_update(self):
+        response = self.client.post(url_for('update'),
+        data = dict(add = 'Book has been updated'),
+        follow_redirects = True
+        )
+        self.assert500(response)
+
+class TestViewDelete(TestBase):
+    def test_get_Delete(self):
+        response = self.client.get(url_for("delete"))
+        self.assert200(response)
+
+class TestDeleteBook(TestBase):
+    def test_post_delete(self):
+        response = self.client.post(url_for('delete'),
+        data = dict(add = 'Book has been deleted'),
+        follow_redirects = True
+        )
+        self.assert500(response)
+

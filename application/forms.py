@@ -34,5 +34,10 @@ class DeleteForm(FlaskForm):
     delete_book = StringField('Delete Book: ')
     submit = SubmitField('Submit')    
 
+class UpdateForm(FlaskForm):
+    update_author = StringField('Update Author: ')
+    update_book = StringField('Update Book: ')
+    submit = SubmitField('Submit')    
+
     
 
