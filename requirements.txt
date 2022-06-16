@@ -7,3 +7,4 @@ wtforms-validators
 flask_testing
 pytest
 pytest_cov
+gunicorn
