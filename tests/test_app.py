@@ -52,7 +52,7 @@ class TestViewRead(TestBase):
 class TestViewUpdate(TestBase):
     def test_get_update(self):
         response = self.client.get(url_for("update"))
-        self.assert500(response)
+        self.assert200(response)
 
 class TestUpdateBook(TestBase):
     def test_post_update(self):
