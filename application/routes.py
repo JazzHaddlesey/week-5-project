@@ -30,8 +30,9 @@ def add():
 
 @app.route('/read', methods = ['GET'])
 def read():
-    all_books = Books.query.all()
-    return render_template('read.html', all_books = all_books)
+    book = Books.query.all()
+    author =Authors.query.all()
+    return render_template('read.html', author=author, book=book)
 
 @app.route('/update', methods = ['GET', 'POST'])
 def update():
