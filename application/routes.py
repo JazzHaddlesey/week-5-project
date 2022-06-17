@@ -19,11 +19,9 @@ def add():
     form = AddForm()
     message =''
     if request.method == 'POST' and form.validate():
-        new_author = Authors(name = form.add_author.data)
         new_book = Books(name = form.add_book.data)
         message = 'Has been added to library'
         db.session.add(new_book)
-        db.session.add(new_author)
         db.session.commit()
         return redirect(url_for('index'))
     return render_template('add.html', form = form, message = message)
@@ -31,18 +29,15 @@ def add():
 @app.route('/read', methods = ['GET'])
 def read():
     book = Books.query.all()
-    author =Authors.query.all()
-    return render_template('read.html', author=author, book=book)
+    return render_template('read.html', book=book)
 
 @app.route('/update', methods = ['GET', 'POST'])
 def update():
     form = UpdateForm()
     message = ''
     if request.method == 'POST' and form.validate():
-        atu = Authors(name = form.update_author.data)
         btu = Books(name = form.update_book.data)
         db.session.update(btu)
-        db.session.update(atu)
         db.session.commit()
         return redirect(url_for('index'))
     return render_template('update.html', form = form, message = message)
@@ -52,10 +47,8 @@ def delete():
     form = DeleteForm()
     message = ''
     if request.method == 'POST' and form.validate():
-        atd = Authors(name = form.delete_author.data)
         btd = Books(name = form.delete_book.data)
         db.session.delete(btd)
-        db.session.delete(atd)
         db.session.commit()
         return redirect(url_for('index'))
     return render_template('delete.html', form = form, message = message)

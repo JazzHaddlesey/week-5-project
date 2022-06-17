@@ -25,17 +25,14 @@ app.config['SECRET_KEY'] = 'YOUR_SECRET_KEY'
 #     submit = SubmitField('Search')
     
 class AddForm(FlaskForm):
-    add_author = StringField('Authors name: ')
     add_book = StringField('Book name: ')
     submit = SubmitField('Submit')
     
 class DeleteForm(FlaskForm):
-    delete_author = StringField('Delete Author: ')
     delete_book = StringField('Delete Book: ')
     submit = SubmitField('Submit')    
 
 class UpdateForm(FlaskForm):
-    update_author = StringField('Update Author: ')
     update_book = StringField('Update Book: ')
     submit = SubmitField('Submit')    
 
