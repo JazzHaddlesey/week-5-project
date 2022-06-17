@@ -34,7 +34,7 @@ class TestViewHome(TestBase):
 class TestViewAdd(TestBase):
     def test_get_add(self):
         response = self.client.get(url_for("add"))
-        self.assert500(response)
+        self.assert200(response)
 
 class TestAddBook(TestBase):
     def test_post_add(self):
@@ -65,7 +65,7 @@ class TestUpdateBook(TestBase):
 class TestViewDelete(TestBase):
     def test_get_Delete(self):
         response = self.client.get(url_for("delete"))
-        self.assert500(response)
+        self.assert200(response)
 
 class TestDeleteBook(TestBase):
     def test_post_delete(self):
@@ -73,5 +73,5 @@ class TestDeleteBook(TestBase):
         data = dict(add = 'Book has been deleted'),
         follow_redirects = True
         )
-        self.assert500(response)
+        self.assert200(response)
 
