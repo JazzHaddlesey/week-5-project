@@ -5,10 +5,11 @@ from application import db, app
 class Authors(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(30))
+    country = db.Column(db.String(30))
     
 class Books(db.Model):
     id = db.Column(db.Integer, primary_key = True)
-    name = db.Column(db.String(30))
+    name = db.Column(db.String(50))
     author = db.Column(db.Integer, db.ForeignKey('authors.id'))
     
 # class Customer(db.Model):
