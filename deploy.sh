@@ -7,4 +7,4 @@ pip3 install -r requirements.txt
 echo "Killing existing processes"
 sudo kill -9 $(lsof -i :5000 | cut -d' ' -f2 | tail -n 5 | head -n 1)
 python3 create.py
-python3 -m gunicorn -D --workers 4 --bind 0.0.0.0:5000 app:app 
+DUILD_ID=nokill python3 -m gunicorn -D --workers 4 --bind 0.0.0.0:5000 app:app 
