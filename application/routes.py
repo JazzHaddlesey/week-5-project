@@ -32,26 +32,18 @@ def read():
     return render_template('read.html', book=book)
 
 @app.route('/update', methods = ['GET', 'POST'])
-def update():
-    form = UpdateForm()
-    message = ''
-    if request.method == 'POST' and form.validate():
-        btu = Books(name = form.update_book.data)
-        db.session.update(btu)
-        db.session.commit()
-        return redirect(url_for('index'))
-    return render_template('update.html', form = form, message = message)
+def update(name):
+    first_book = Books.query.first()
+    first_book.name = name
+    db.session.commit()
+    return first_book.name
    
 @app.route('/delete', methods = ['GET', 'POST'])
 def delete():
-    form = DeleteForm()
-    message = ''
-    if request.method == 'POST' and form.validate():
-        btd = Books(name = form.delete_book.data)
-        db.session.delete(btd)
-        db.session.commit()
-        return redirect(url_for('index'))
-    return render_template('delete.html', form = form, message = message)
+    deleted_book = Books.query.first()
+    db.session.delete(deleted_book)
+    db.session.commit()
+    return deleted_book.name
 
 # @app.route('/register', methods = ['GET','POST'])
 # def register():
