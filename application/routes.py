@@ -31,7 +31,7 @@ def read():
     book = Books.query.all()
     return render_template('read.html', books=book)
 
-@app.route('/update', methods = ['GET', 'POST'])
+@app.route('/update/<name>', methods = ['GET', 'POST'])
 def update(name):
     first_book = Books.query.first()
     first_book.name = name
